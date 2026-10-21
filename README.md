@@ -58,5 +58,22 @@ Os documentos do projeto dividem-se em bases primárias de extração, matrizes 
 │
 └── 📂 Documentação e Suporte
     ├── Construção e Interpretação MCS.docx<-- Notas metodológicas e memorial de cálculo
+
+
+## 6. Modelo de Equilíbrio Geral Computável (EGC)
+
+As simulações de longo prazo (2018–2050) foram executadas por meio da biblioteca `cgelab` (Python).
+
+### Estrutura do Modelo:
+- **Dimensão:** 21 setores produtivos × 2 fatores primários (Capital e Trabalho).
+- **Substituição de Fatores:** CES com $\sigma = 0,60$ (setores convencionais) e $\sigma = 0,40$ (H2V).
+- **Comércio:** Hipótese de Armington ($\sigma_M = 2,00$).
+- **Restrição Tecnológica:** Consumo termodinâmico fixado em 56,42 kWh/kg de H2V.
+- **Fechamentos:** Pleno Emprego (Neoclássico) e Salário Rígido (Keynesiano com capacidade ociosa).
+
+### Como Rodar a Simulação:
+1. Certifique-se de ter o Python 3.9+ e instale as dependências:
+   ```bash
+   pip install -r requirements.txt
     ├── Estrato Familiar.docx             <-- Critérios de corte da renda domiciliar
     └── inspecionar_setores.py            <-- Inspeção e validação dos setores CNAE
