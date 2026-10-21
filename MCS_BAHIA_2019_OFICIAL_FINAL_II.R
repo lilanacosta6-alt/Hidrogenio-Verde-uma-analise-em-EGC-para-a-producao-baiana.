@@ -6,17 +6,25 @@ library(openxlsx)
 library(dplyr)
 library(tidyr)
 
-# 1. Definir pasta local de trabalho
-caminho_dados <- "C:/Users/Lilana/Desktop/Modelo Final/MCS/Dados"
-if (!dir.exists(caminho_dados)) {
-  caminho_dados <- "C:/Users/Lilana/Área de Trabalho/Modelo Final/MCS/Dados"
+# 1. Definir pasta de trabalho de forma dinâmica
+caminho_pessoal <- "C:/Users/Lilana/Desktop/Modelo Final/MCS/Dados"
+caminho_alt     <- "C:/Users/Lilana/Área de Trabalho/Modelo Final/MCS/Dados"
+
+if (dir.exists(caminho_pessoal)) {
+  caminho_dados <- caminho_pessoal
+} else if (dir.exists(caminho_alt)) {
+  caminho_dados <- caminho_alt
+} else {
+  # Se for executado no computador da banca ou de terceiros:
+  caminho_dados <- getwd()
 }
 
 cat("Pasta de trabalho configurada para:\n", caminho_dados, "\n\n")
 
-
-# 1. Abrir direto a pasta onde o R acabou de salvar o arquivo:
-shell.exec("C:/Users/Lilana/Desktop/Modelo Final/MCS/Dados")
+# Abrir a pasta de saída apenas se ela existir (sem gerar erro para terceiros)
+if (dir.exists(caminho_dados) && .Platform$OS.type == "windows") {
+  try(shell.exec(caminho_dados), silent = TRUE)
+}
 
 # 2. Definição das 80 Contas Canônicas
 nomes_setores <- paste0("S_", sprintf("%02d", 1:68))
